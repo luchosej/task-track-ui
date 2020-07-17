@@ -1,12 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { Button, Form, Input } from 'semantic-ui-react'
-import createUserAPI from 'api/UserAPI/createUserAPI'
-import {
-  fetchUser,
-  fetchUserSuccess,
-  fetchUserFail
-} from './signupSlice'
+import { createUser } from './signupSlice'
 import './styles.scss'
 
 export default function Signup() {
@@ -15,12 +10,8 @@ export default function Signup() {
   const [password, setPassword] = useState(undefined)
   const dispatch = useDispatch();
 
-  const handleOnSubmit = async (name, email, password) => {
-    dispatch(fetchUser())
-    const data = await createUserAPI(name, email, password)
-    if (data.errors)
-      return dispatch(fetchUserFail(data.errors))
-    dispatch(fetchUserSuccess(data))
+  const handleOnSubmit = (name, email, password) => {
+    dispatch(createUser(name, email, password))
   }
 
   return (
