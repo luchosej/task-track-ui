@@ -16,7 +16,7 @@ export const signupSlice = createSlice({
     },
     createUserFail: (state, action) => {
       state.loading = false
-      state.error = action.payload
+      state.error = action.payload.error
     },
   },
 });
@@ -24,11 +24,14 @@ export const signupSlice = createSlice({
 export const { createUserBegin, createUserSuccess, createUserFail } = signupSlice.actions;
 
 export const createUser = (name, email, password) => async dispatch => {
-  dispatch(createUserBegin()) 
-  const data = await createUserAPI(name, email, password)
-  if (data.errors)
-    return dispatch(createUserFail({ error: data.errors }))
-  dispatch(createUserSuccess(data))
+  try {
+    dispatch(createUserBegin()) 
+    const data = await createUserAPI(name, email, password)
+    dispatch(createUserSuccess(data))
+  } catch (error) {
+    dispatch(createUserFail(error))
+  }
 };
 
+export const selectLoading = state => state.signup.loading
 export default signupSlice.reducer;
