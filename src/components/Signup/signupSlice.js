@@ -34,4 +34,5 @@ export const createUser = (name, email, password) => async dispatch => {
 };
 
 export const selectLoading = state => state.signup.loading
+export const selectError = state => state.signup.error
 export default signupSlice.reducer;

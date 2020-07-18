@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Form, Input } from 'semantic-ui-react'
-import { createUser, selectLoading } from './signupSlice'
+import { Button, Form, Input, Message } from 'semantic-ui-react'
+import { createUser, selectLoading, selectError } from './signupSlice'
 import './styles.scss'
 
 export default function Signup() {
@@ -9,6 +9,7 @@ export default function Signup() {
   const [email, setEmail] = useState(undefined)
   const [password, setPassword] = useState(undefined)
   const loading = useSelector(selectLoading)
+  const error = useSelector(selectError)
   const dispatch = useDispatch();
 
   const handleOnSubmit = (name, email, password) => {
@@ -37,6 +38,11 @@ export default function Signup() {
         </Form.Field>
         <Button type='submit'>Sign up</Button>
       </Form>
+      {error &&
+        <Message negative>
+          <p>{error}</p>
+        </Message>
+      }
     </div>
   )
 }
