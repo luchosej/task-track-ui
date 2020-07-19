@@ -24,12 +24,13 @@ export const loginSlice = createSlice({
 
 export const { loginUserBegin, loginUserSuccess, loginUserFail } = loginSlice.actions;
 
-export const loginUser = (email, password) => async dispatch => {
+export const loginUser = (email, password, history) => async dispatch => {
   try {
     dispatch(loginUserBegin()) 
     const data = await loginUserAPI(email, password)
     dispatch(storeSessionUser({ user: data }))
     dispatch(loginUserSuccess(data))
+    history.push('/dashboard')
   } catch (error) {
     dispatch(loginUserFail(error))
   }

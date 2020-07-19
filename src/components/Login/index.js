@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Form, Input, Message, Image } from 'semantic-ui-react'
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { loginUser, selectLoading, selectError } from './loginSlice'
 import logo from 'assets/images/logo/taskTrackLogo.png'
 import './styles.scss'
@@ -10,11 +10,12 @@ export default function Login() {
   const [email, setEmail] = useState(undefined)
   const [password, setPassword] = useState(undefined)
   const loading = useSelector(selectLoading)
+  const history = useHistory()
   const error = useSelector(selectError)
   const dispatch = useDispatch();
 
   const handleOnSubmit = (email, password) => {
-    dispatch(loginUser(email, password))
+    dispatch(loginUser(email, password, history))
   }
 
   return (
