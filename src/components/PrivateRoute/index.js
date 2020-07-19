@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Redirect } from "react-router-dom";
 
 export default function PrivateRoute({ children, ...rest }) {
-  const isAuthenticated = true
+  const isAuthenticated = sessionStorage.getItem('token')
   return (
     <Route
       {...rest}

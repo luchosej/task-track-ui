@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { loginUserAPI } from 'api/user'
+import { storeSessionUser } from 'components/Session/sessionSlice'
 
 export const loginSlice = createSlice({
   name: 'login',
@@ -27,6 +28,7 @@ export const loginUser = (email, password) => async dispatch => {
   try {
     dispatch(loginUserBegin()) 
     const data = await loginUserAPI(email, password)
+    dispatch(storeSessionUser({ user: data }))
     dispatch(loginUserSuccess(data))
   } catch (error) {
     dispatch(loginUserFail(error))

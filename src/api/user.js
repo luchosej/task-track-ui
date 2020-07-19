@@ -10,7 +10,9 @@ export async function createUserAPI(name, email, password) {
 
 export async function loginUserAPI(email, password) {
   try {
-    return await client('users/login', { body: { email, password } })
+    const { token, user } = await client('users/login', { body: { email, password } })
+    sessionStorage.setItem('token', token)
+    return user
   } catch (error) {
     throw error
   }

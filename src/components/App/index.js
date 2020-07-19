@@ -17,8 +17,11 @@ function App() {
           <Route path="/login">
             <Login />
           </Route>
-          <PrivateRoute path="/signup">
+          <Route path="/signup">
             <Signup />
+          </Route>
+          <PrivateRoute path="/dashboard">
+            <div>dashboard</div>
           </PrivateRoute>
         </Switch>
     </Router>
