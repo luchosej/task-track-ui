@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Form, Input, Message } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
 import { createUser, selectLoading, selectError } from './signupSlice'
 import './styles.scss'
 
@@ -43,6 +44,7 @@ export default function Signup() {
           <p>{error}</p>
         </Message>
       }
+      <p className="signup__link">Already have an account? <Link to="/login">Login</Link></p>
     </div>
   )
 }
