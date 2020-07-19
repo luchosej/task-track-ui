@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Form, Input, Message } from 'semantic-ui-react'
+import { Button, Form, Input, Message, Image } from 'semantic-ui-react'
 import { Link } from "react-router-dom";
 import { loginUser, selectLoading, selectError } from './loginSlice'
+import logo from 'assets/images/logo/taskTrackLogo.png'
 import './styles.scss'
 
 export default function Login() {
@@ -18,7 +19,13 @@ export default function Login() {
 
   return (
     <div className="login">
-      <Form loading={loading} onSubmit={() => handleOnSubmit(email, password)}>
+      <Image className="login__logo" src={logo} size="small" />
+      <Message
+        attached
+        header='Welcome to TaskTrack!'
+        content='Fill out the form below to log-in'
+      />
+      <Form className="attached fluid segment" loading={loading} onSubmit={() => handleOnSubmit(email, password)}>
         <Form.Field
           id='form-input-control-error-email'
           control={Input}
@@ -35,7 +42,7 @@ export default function Login() {
           <label>Password</label>
           <input type='password' />
         </Form.Field>
-        <Button type='submit'>Login</Button>
+        <Button color='blue' type='submit'>Login</Button>
       </Form>
       {error &&
         <Message negative>

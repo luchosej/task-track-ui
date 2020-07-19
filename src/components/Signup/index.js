@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Form, Input, Message } from 'semantic-ui-react'
+import { Button, Form, Input, Message, Image } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import { createUser, selectLoading, selectError } from './signupSlice'
+import logo from 'assets/images/logo/taskTrackLogo.png'
 import './styles.scss'
 
 export default function Signup() {
@@ -19,7 +20,13 @@ export default function Signup() {
 
   return (
     <div className="signup">
-      <Form loading={loading} onSubmit={() => handleOnSubmit(name, email, password)}>
+      <Image className="signup__logo" src={logo} size="small" />
+      <Message
+        attached
+        header='Welcome to TaskTrack!'
+        content='Fill out the form below to sign-up for a new account'
+      />
+      <Form className="attached fluid segment" loading={loading} onSubmit={() => handleOnSubmit(name, email, password)}>
         <Form.Field onChange={(e) => setName(e.target.value)} required>
           <label>Full Name</label>
           <input placeholder='Full name' required />
@@ -37,7 +44,7 @@ export default function Signup() {
           <label>Password</label>
           <input type='password' placeholder='Please type a password' minLength={7} />
         </Form.Field>
-        <Button type='submit'>Sign up</Button>
+        <Button color='green' type='submit'>Sign up</Button>
       </Form>
       {error &&
         <Message negative>
