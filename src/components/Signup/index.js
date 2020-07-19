@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Form, Input, Message, Image } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
-import { createUser, selectLoading, selectError } from './signupSlice'
+import { createUser, selectLoading, selectError, selectSuccess } from './signupSlice'
 import logo from 'assets/images/logo/taskTrackLogo.png'
 import './styles.scss'
 
@@ -12,6 +12,7 @@ export default function Signup() {
   const [password, setPassword] = useState(undefined)
   const loading = useSelector(selectLoading)
   const error = useSelector(selectError)
+  const success = useSelector(selectSuccess)
   const dispatch = useDispatch();
 
   const handleOnSubmit = (name, email, password) => {
@@ -49,6 +50,11 @@ export default function Signup() {
       {error &&
         <Message negative>
           <p>{error}</p>
+        </Message>
+      }
+      {success && 
+        <Message positive>
+          <p>Account created succesfully!</p>
         </Message>
       }
       <p className="signup__link">Already have an account? <Link to="/login">Login</Link></p>

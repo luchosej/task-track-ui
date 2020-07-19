@@ -5,7 +5,8 @@ export const signupSlice = createSlice({
   name: 'signup',
   initialState: {
     loading: false,
-    error: null
+    error: null,
+    success: false
   },
   reducers: {
     createUserBegin: state => {
@@ -13,6 +14,7 @@ export const signupSlice = createSlice({
     },
     createUserSuccess: state => {
       state.loading = false
+      state.success = true
     },
     createUserFail: (state, action) => {
       state.loading = false
@@ -35,4 +37,5 @@ export const createUser = (name, email, password) => async dispatch => {
 
 export const selectLoading = state => state.signup.loading
 export const selectError = state => state.signup.error
+export const selectSuccess = state => state.signup.success
 export default signupSlice.reducer;
