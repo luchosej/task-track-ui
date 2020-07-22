@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { createUserAPI } from 'api/user'
+import { UserService } from 'services'
 
 export const signupSlice = createSlice({
   name: 'signup',
@@ -28,7 +28,7 @@ export const { createUserBegin, createUserSuccess, createUserFail } = signupSlic
 export const createUser = (name, email, password) => async dispatch => {
   try {
     dispatch(createUserBegin()) 
-    const data = await createUserAPI(name, email, password)
+    const data = await UserService.createUser(name, email, password)
     dispatch(createUserSuccess(data))
   } catch (error) {
     dispatch(createUserFail(error))
