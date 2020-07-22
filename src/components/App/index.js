@@ -9,6 +9,7 @@ import LandingPage from 'components/LandingPage'
 import Login from 'components/Login'
 import Signup from 'components/Signup'
 import './App.scss';
+import Dashboard from 'components/Dashboard';
 
 function App() {
   return (
@@ -25,7 +26,7 @@ function App() {
             <Signup />
           </Route>
           <PrivateRoute path="/dashboard">
-            <div>dashboard</div>
+            <Dashboard />
           </PrivateRoute>
         </Switch>
     </Router>
