@@ -18,9 +18,10 @@ export default function LandingPage() {
 
   return (
     <div className="landing">
-      <Image className="login__logo" src={logo} size="medium" />
-      <h1>Welcome to TaskTrack!</h1>
-      <h2>Create. Track. Success.</h2>
+      <Image className="landing__logo" src={logo} size="medium" />
+      <h1 className="landing__title">Welcome to TaskTrack!</h1>
+      <p className="landing__text">The track tracker tool you'll enjoy using. Keep your tasks organized easily and efficiently.</p>
+      <h2 className="landing__legend">Create. Track. Success.</h2>
       <div className="landing__buttons">
         <Button color='green' inverted animated onClick={() => history.push('/signup')}>
           <Button.Content visible>Sign up</Button.Content>

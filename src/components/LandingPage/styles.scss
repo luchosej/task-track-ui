@@ -1,5 +1,23 @@
 .landing {
 
+  &__logo {
+    margin: auto;
+  }
+
+  &__title {
+    margin-top: -5px;
+    font-size: 7vh;
+  }
+
+  &__text {
+    font-size: 5vh;
+    margin: auto;
+    width: 50%;
+  }
+
+  &__legend {
+    font-weight: 100;
+  }
   &__buttons {
     display: flex;
     justify-content: center;
