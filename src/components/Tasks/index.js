@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import CreateTask from './CreateTask'
-import { fetchTasks } from './taskSlice'
+import { fetchTasks, createTask } from './taskSlice'
 
 export default function Tasks() {
   const dispatch = useDispatch();
@@ -10,9 +10,13 @@ export default function Tasks() {
     dispatch(fetchTasks())
   })
 
+  function handleOnCreateTask(description, completed = false) {
+    dispatch(createTask(description, completed))
+  }
+
   return (
     <div className="tasks">
-      <CreateTask/>
+      <CreateTask onCreateTask={handleOnCreateTask} />
     </div>
   )
 }

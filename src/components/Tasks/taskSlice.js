@@ -19,10 +19,27 @@ export const taskSlice = createSlice({
       state.loading = false
       state.error = action.payload.error
     },
+    createTaskBegin: state => {
+      state.loading = true
+    },
+    createTaskSuccess: (state, action) => {
+      state.loading = false
+    },
+    createTaskFail: (state, action) => {
+      state.loading = false
+      state.error = action.payload.error
+    },
   },
 });
 
-export const { fetchTasksBegin, fetchTasksSuccess, fetchTasksFail } = taskSlice.actions;
+export const {
+  fetchTasksBegin,
+  fetchTasksSuccess,
+  fetchTasksFail,
+  createTaskBegin,
+  createTaskFail,
+  createTaskSuccess
+} = taskSlice.actions;
 
 export const fetchTasks = () => async dispatch => {
   try {
@@ -31,6 +48,16 @@ export const fetchTasks = () => async dispatch => {
     dispatch(fetchTasksSuccess(data))
   } catch (error) {
     dispatch(fetchTasksFail(error))
+  }
+};
+
+export const createTask = (description, completed) => async dispatch => {
+  try {
+    dispatch(createTaskBegin())
+    const data = await TaskService.create(description, completed)
+    dispatch(createTaskSuccess(data))
+  } catch (error) {
+    dispatch(createTaskFail(error))
   }
 };
 

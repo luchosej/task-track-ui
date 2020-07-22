@@ -9,6 +9,14 @@ class TaskService {
       throw error
     }
   }
+
+  async create(description, completed) {
+    try {
+      return await HtppService.client('tasks', { body: { description, completed } })
+    } catch (error) {
+      throw error
+    }
+  }
 }
 
 export default new TaskService()
