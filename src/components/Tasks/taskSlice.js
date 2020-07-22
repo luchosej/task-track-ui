@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { TaskService } from 'services'
 
 export const taskSlice = createSlice({
   name: 'tasks',
@@ -10,9 +11,9 @@ export const taskSlice = createSlice({
     fetchTasksBegin: state => {
       state.loading = true
     },
-    fetchTasksSuccess: state => {
+    fetchTasksSuccess: (state, action) => {
       state.loading = false
-      state.success = true
+      state.tasks = action.payload
     },
     fetchTasksFail: (state, action) => {
       state.loading = false
@@ -25,8 +26,9 @@ export const { fetchTasksBegin, fetchTasksSuccess, fetchTasksFail } = taskSlice.
 
 export const fetchTasks = () => async dispatch => {
   try {
-    dispatch(fetchTasksBegin()) 
-    dispatch(fetchTasksSuccess())
+    dispatch(fetchTasksBegin())
+    const data = await TaskService.getAll()
+    dispatch(fetchTasksSuccess(data))
   } catch (error) {
     dispatch(fetchTasksFail(error))
   }

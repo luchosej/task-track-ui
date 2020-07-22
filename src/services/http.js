@@ -1,7 +1,12 @@
+import AuthenticationService from './authentication'
 class HttpService {
-
+  
   client(endpoint, { body, ...customConfig } = {}) {
-    const headers = { 'Content-Type': 'application/json' }
+    const token = AuthenticationService.getToken() 
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': token ? `Bearer ${token}` : null
+    }
     const config = {
       method: body ? 'POST' : 'GET',
       ...customConfig,

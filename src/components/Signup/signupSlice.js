@@ -28,7 +28,7 @@ export const { createUserBegin, createUserSuccess, createUserFail } = signupSlic
 export const createUser = (name, email, password) => async dispatch => {
   try {
     dispatch(createUserBegin()) 
-    const data = await UserService.createUser(name, email, password)
+    const data = await UserService.create(name, email, password)
     dispatch(createUserSuccess(data))
   } catch (error) {
     dispatch(createUserFail(error))
