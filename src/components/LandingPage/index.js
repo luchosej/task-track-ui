@@ -1,12 +1,20 @@
 import React, { useEffect } from 'react'
 import { Image, Button, Icon } from 'semantic-ui-react'
 import { useHistory } from 'react-router-dom'
+import { AuthenticationService } from 'services'
 
 import logo from 'assets/images/logo/taskTrackLogo.png'
 import './styles.scss'
 
 export default function LandingPage() {
   const history = useHistory()
+
+  useEffect(() => {
+    const token = AuthenticationService.getToken()
+    console.log(token)
+    if (token)
+      history.push('/dashboard')
+  })
 
   return (
     <div className="landing">
