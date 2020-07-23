@@ -8,6 +8,7 @@ export default function CreateTask({ onCreateTask }) {
   
   const handleOnCreateTask = () => {
     onCreateTask(description, completed)
+    setOpen(false)
   }
 
   return (

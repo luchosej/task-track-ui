@@ -4,7 +4,7 @@ class TaskService {
 
   async getAll() {
     try {
-      return await HtppService.client('tasks')
+      return await HtppService.client('tasks?sortBy=createdAt:desc')
     } catch (error) {
       throw error
     }

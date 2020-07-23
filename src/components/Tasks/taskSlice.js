@@ -24,6 +24,7 @@ export const taskSlice = createSlice({
     },
     createTaskSuccess: (state, action) => {
       state.loading = false
+      state.tasks.unshift(action.payload)
     },
     createTaskFail: (state, action) => {
       state.loading = false
@@ -63,4 +64,5 @@ export const createTask = (description, completed) => async dispatch => {
 
 export const selectLoading = state => state.tasks.loading
 export const selectError = state => state.tasks.error
+export const selectTasks = state => state.tasks.tasks
 export default taskSlice.reducer;
