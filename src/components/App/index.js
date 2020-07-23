@@ -14,7 +14,7 @@ import Dashboard from 'components/Dashboard';
 function App() {
   return (
     <div className="App">
-      <Router>
+       <Router>
         <Switch>
           <Route exact path="/">
             <LandingPage />

@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import { AuthenticationService } from 'services'
+import NavBar from 'components/NavBar'
 export default function PrivateRoute({ children, ...rest }) {
   const isAuthenticated = AuthenticationService.getToken()
   return (
@@ -8,7 +9,10 @@ export default function PrivateRoute({ children, ...rest }) {
       {...rest}
       render={({ location }) =>
         isAuthenticated ? (
-          children
+          <>
+            <NavBar />
+            {children}
+          </>
         ) : (
           <Redirect
             to={{
