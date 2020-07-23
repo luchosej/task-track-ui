@@ -1,4 +1,5 @@
 import HtppService from './http'
+import { HttpService } from 'services'
 
 class TaskService {
 
@@ -12,7 +13,15 @@ class TaskService {
 
   async create(description, completed) {
     try {
-      return await HtppService.client('tasks', { body: { description, completed } })
+      return await HtppService.client('tasks', { body: { description, completed }, method: 'POST' })
+    } catch (error) {
+      throw error
+    }
+  }
+
+  async delete(id) {
+    try {
+      return await HttpService.client(`tasks/${id}`, { method: 'DELETE' })
     } catch (error) {
       throw error
     }

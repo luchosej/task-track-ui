@@ -9,7 +9,7 @@ class AuthenticationService {
 
   async login(email, password) {
      try {
-      const { token, user } = await HttpService.client('users/login', { body: { email, password } })
+      const { token, user } = await HttpService.client('users/login', { body: { email, password }, method: 'POST' })
       StorageService.persist('user-token', token, 'session')
       return user
     } catch (error) {

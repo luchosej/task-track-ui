@@ -4,7 +4,7 @@ class UserService {
 
   async create(name, email, password) {
     try {
-      return await HtppService.client('users', { body: { name, email, password } })
+      return await HtppService.client('users', { body: { name, email, password }, method: 'POST' })
     } catch (error) {
       throw error
     }

@@ -8,7 +8,7 @@ class HttpService {
       'Authorization': token ? `Bearer ${token}` : null
     }
     const config = {
-      method: body ? 'POST' : 'GET',
+      method: customConfig.method ? customConfig.method : 'GET',
       ...customConfig,
       headers: {
         ...headers,

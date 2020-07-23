@@ -30,8 +30,19 @@ export const taskSlice = createSlice({
       state.loading = false
       state.error = action.payload.error
     },
+    deleteTaskBegin: state => {
+      state.loading = true
+    },
+    deleteTaskSuccess: (state, action) => {
+      state.loading = false
+      state.tasks = state.tasks.filter(t => t._id !== action.payload._id)
+    },
+    deleteTaskFail: (state, action) => {
+      state.loading = false
+      state.error = action.payload.error
+    },
   },
-});
+})
 
 export const {
   fetchTasksBegin,
@@ -39,8 +50,11 @@ export const {
   fetchTasksFail,
   createTaskBegin,
   createTaskFail,
-  createTaskSuccess
-} = taskSlice.actions;
+  createTaskSuccess,
+  deleteTaskBegin,
+  deleteTaskFail,
+  deleteTaskSuccess
+} = taskSlice.actions
 
 export const fetchTasks = () => async dispatch => {
   try {
@@ -50,7 +64,7 @@ export const fetchTasks = () => async dispatch => {
   } catch (error) {
     dispatch(fetchTasksFail(error))
   }
-};
+}
 
 export const createTask = (description, completed) => async dispatch => {
   try {
@@ -59,6 +73,16 @@ export const createTask = (description, completed) => async dispatch => {
     dispatch(createTaskSuccess(data))
   } catch (error) {
     dispatch(createTaskFail(error))
+  }
+}
+
+export const deleteTask = (id) => async dispatch => {
+  try {
+    dispatch(deleteTaskBegin())
+    const data = await TaskService.delete(id)
+    dispatch(deleteTaskSuccess(data))
+  } catch (error) {
+    dispatch(deleteTaskFail(error))
   }
 };
 
