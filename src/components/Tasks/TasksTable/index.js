@@ -18,9 +18,9 @@ export default function TasksTable({ tasks }) {
           {tasks?.map(task => (
             <Table.Row>
             <Table.Cell>{task.description}</Table.Cell>
-            <Table.Cell>{task.createdAt.split('T')[0]}</Table.Cell>
-            <Table.Cell>{task.completed ? 'Completed' : 'Uncompleted'}</Table.Cell>
-            <Table.Cell><ClickeableIcon onClick={() => console.log('asd')} name='trash' /></Table.Cell>
+            <Table.Cell collapsing >{task.createdAt.split('T')[0]}</Table.Cell>
+            <Table.Cell collapsing>{task.completed ? 'Completed' : 'Uncompleted'}</Table.Cell>
+            <Table.Cell collapsing><ClickeableIcon onClick={() => console.log('asd')} name='trash' /></Table.Cell>
           </Table.Row>
           ))}
         </Table.Body>
