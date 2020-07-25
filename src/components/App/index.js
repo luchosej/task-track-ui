@@ -10,6 +10,7 @@ import Login from 'components/Login'
 import Signup from 'components/Signup'
 import './App.scss';
 import Dashboard from 'components/Dashboard';
+import ModalContainer from 'components/ModalContainer';
 
 function App() {
   return (
@@ -30,7 +31,7 @@ function App() {
           </PrivateRoute>
         </Switch>
     </Router>
-      
+    <ModalContainer />
     </div>
   );
 }

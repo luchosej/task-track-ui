@@ -1,13 +1,12 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
 import { Table } from 'semantic-ui-react'
 import ClickeableIcon from 'components/ClickeableIcon'
-import ConfirmModal from 'components/Modals/ConfirmModal'
+import { showModal } from 'components/ModalContainer/modalSlice'
 
 export default function TasksTable({ tasks, onDeleteTask }) {
+  const dispatch = useDispatch()
 
-  function handleOnDeleteTask(id) {
-
-  }
   return (
     <div className='task-table'>
       <Table celled>
@@ -26,14 +25,18 @@ export default function TasksTable({ tasks, onDeleteTask }) {
             <Table.Cell collapsing >{task.createdAt.split('T')[0]}</Table.Cell>
             <Table.Cell collapsing>{task.completed ? 'Completed' : 'Uncompleted'}</Table.Cell>
             <Table.Cell collapsing>
-              <ConfirmModal 
-                trigger={<ClickeableIcon name='trash' />}
-                onConfirm={() => onDeleteTask(task._id)}
-                title='Do you want to delete the task?'
-                content='You will lose all the process you have done in this task and you will not be able to recover it.'
-                icon='trash'
-              />
-              
+              <ClickeableIcon
+                name='trash'
+                onClick={() => dispatch(showModal({
+                  modalProps: {
+                    onConfirm: () => onDeleteTask(task._id),
+                    title: 'Do you want to delete the task?',
+                    content: 'You will lose all the process you have done in this task and you will not be able to recover it.',
+                    icon: 'trash',
+                  },
+                  modalType: 'confirm'
+                }))}
+              />      
             </Table.Cell>
           </Table.Row>
           ))}

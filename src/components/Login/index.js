@@ -12,7 +12,7 @@ export default function Login() {
   const loading = useSelector(selectLoading)
   const history = useHistory()
   const error = useSelector(selectError)
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   const handleOnSubmit = (email, password) => {
     dispatch(loginUser(email, password, history))
