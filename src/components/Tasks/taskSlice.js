@@ -92,10 +92,10 @@ export const createTask = (description, completed) => async (dispatch) => {
   }
 };
 
-export const editTask = (id, completed) => async (dispatch) => {
+export const editTask = (id, description, completed) => async (dispatch) => {
   try {
     dispatch(editTaskBegin());
-    const data = await TaskService.edit(id, completed);
+    const data = await TaskService.edit(id, description, completed);
     dispatch(editTaskSuccess(data));
     dispatch(hideModal());
   } catch (error) {

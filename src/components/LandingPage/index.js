@@ -11,7 +11,6 @@ export default function LandingPage() {
 
   useEffect(() => {
     const token = AuthenticationService.getToken()
-    console.log(token)
     if (token)
       history.push('/dashboard')
   })

@@ -19,9 +19,9 @@ class TaskService {
     }
   }
 
-  async edit(id, completed) {
+  async edit(id, description, completed ) {
     try {
-      return await HtppService.client(`tasks/${id}`, { body: { completed }, method: 'PATCH' })
+      return await HtppService.client(`tasks/${id}`, { body: { description, completed }, method: 'PATCH' })
     } catch (error) {
       throw error
     }

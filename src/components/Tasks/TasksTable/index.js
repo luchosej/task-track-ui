@@ -25,7 +25,7 @@ export default function TasksTable({ tasks, onDeleteTask }) {
               </Table.Cell>
               <Table.Cell textAlign='center' collapsing>
                 {task.completed
-                  ? <Icon color='green' name='check' />
+                  ? <Icon color='green' size='large' name='check' />
                   : <Icon color='red' size='large' name='remove' />
                 }
               </Table.Cell>
