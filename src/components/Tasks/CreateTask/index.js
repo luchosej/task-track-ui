@@ -1,42 +1,19 @@
-import React, { useState } from 'react'
-import { Button, TextArea, Modal, Form } from 'semantic-ui-react'
+import React from 'react'
+import { Button } from 'semantic-ui-react'
+import { useDispatch } from 'react-redux'
+import { showModal } from 'components/ModalContainer/modalSlice'
 
-export default function CreateTask({ onCreateTask }) {
-  const [open, setOpen] = useState(false)
-  const [description, setDescription] = useState(null)
-  const [completed, setCompleted] = useState(false)
-  
-  const handleOnCreateTask = () => {
-    onCreateTask(description, completed)
-    setOpen(false)
-  }
-
+export default function CreateTask() {
+  const dispatch = useDispatch()
   return (
-    <Modal
-      open={open}
-      trigger={<Button color='green' onClick={() => setOpen(true)} >Create new task</Button>}
+    <Button
+      color='green'
+      onClick={() => dispatch(showModal({
+        modalType: 'createEdit',
+        modalProps: { isEdit: true }
+      }))}
     >
-      <Modal.Header>Create new task!</Modal.Header>
-      <Modal.Content>
-        <Form>
-          <TextArea
-            placeholder='Add a description for the task'
-            onChange={(e) => setDescription(e.target.value)}
-          />
-        </Form>
-      </Modal.Content>
-      <Modal.Actions>
-        <Button color='red' onClick={() => setOpen(false)}>
-          Cancel
-        </Button>
-        <Button
-          positive
-          icon='checkmark'
-          labelPosition='right'
-          content="Yep, create task!"
-          onClick={() => handleOnCreateTask()}
-        />
-      </Modal.Actions>
-    </Modal>
+      Create new task
+    </Button>
   )
 }

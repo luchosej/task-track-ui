@@ -5,6 +5,7 @@ import { selectModalType, selectModalProps } from './modalSlice'
 
 const MODAL_TYPES = {
   'confirm': modalTypes.ConfirmModal,
+  'createEdit': modalTypes.CreateEditTaskModal
 }
 
 export default function ModalContainer() {
