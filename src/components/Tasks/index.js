@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import CreateTask from './CreateTask'
 import TasksTable from './TasksTable'
+import TasksBoard from './TasksBoard'
 import { fetchTasks, createTask, selectTasks, deleteTask } from './taskSlice'
 
 export default function Tasks() {
@@ -23,7 +24,8 @@ export default function Tasks() {
   return (
     <div className="tasks">
       <CreateTask onCreateTask={OnCreateTask} />
-      <TasksTable tasks={tasks} onDeleteTask={onDeleteTask} />
+      {false && <TasksTable tasks={tasks} onDeleteTask={onDeleteTask} />}
+      <TasksBoard tasks={tasks} />
     </div>
   )
 }
