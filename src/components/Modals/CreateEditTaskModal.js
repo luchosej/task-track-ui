@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Modal, Form, TextArea, Button, Checkbox } from 'semantic-ui-react'
+import { Modal, Form, TextArea, Button, Checkbox, Input } from 'semantic-ui-react'
 import { createTask, editTask } from 'components/Tasks/taskSlice'
 import { hideModal } from 'components/ModalContainer/modalSlice'
 import { useDispatch } from 'react-redux'
@@ -8,17 +8,19 @@ export default function CreateEditTaskModal({
     id,
     open,
     isEdit,
-    description = null,
-    completed = false
+    description,
+    completed,
+    title,
   }) {
   const [description_, setDescription] = useState(description)
+  const [title_, setTitle] = useState(title)
   const [completed_, setCompleted] = useState(completed)
   const dispatch = useDispatch()
 
   const handleOnCreateEditTask = () => {
     if (isEdit)
       return dispatch(editTask(id, description_, completed_ ))
-    return dispatch(createTask(description_, completed_))
+    return dispatch(createTask(title_, description_, completed_))
   }
 
   return (
@@ -26,6 +28,11 @@ export default function CreateEditTaskModal({
       <Modal.Header>{`${isEdit ? 'Edit' : 'Create new'} task!`}</Modal.Header>
       <Modal.Content>
         <Form>
+          <Form.Field
+            control={Input}
+            placeholder='Task title'
+            onChange={(e) => setTitle(e.target.value)}
+          />
           <Form.Field>
             <TextArea
               value={description_}

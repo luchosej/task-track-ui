@@ -1,1 +1,1 @@
-export const COLUMNS = ['Description', 'Created At', 'Completed', 'Actions']
+export const COLUMNS = ['To Do', 'In Progress', 'Done']

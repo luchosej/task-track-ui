@@ -3,6 +3,8 @@ import { useDispatch } from 'react-redux'
 import { Table, Icon } from 'semantic-ui-react'
 import ClickeableIcon from 'components/ClickeableIcon'
 import { showModal } from 'components/ModalContainer/modalSlice'
+import TaskCard from '../TaskCard'
+import EmptyStateTasks from './EmptyStateTasks'
 import { COLUMNS } from './utils'
 
 export default function TasksTable({ tasks, onDeleteTask }) {
@@ -19,17 +21,23 @@ export default function TasksTable({ tasks, onDeleteTask }) {
         <Table.Body>
           {tasks?.map((task, index) => (
             <Table.Row key={index}>
-              <Table.Cell>{task.description}</Table.Cell>
-              <Table.Cell collapsing >
-                {task.createdAt.split('T')[0]}
+              <Table.Cell>
+                <TaskCard
+                  description={task.description}
+                  header={task.title}
+                  meta={task.createdAt.split('T')[0]}
+                />
               </Table.Cell>
-              <Table.Cell textAlign='center' collapsing>
+              <Table.Cell>
+                
+              </Table.Cell>
+              <Table.Cell textAlign='center'>
                 {task.completed
                   ? <Icon color='green' size='large' name='check' />
                   : <Icon color='red' size='large' name='remove' />
                 }
               </Table.Cell>
-              <Table.Cell collapsing singleLine>
+              <Table.Cell>
                 <div style={{ 'display': 'flex', 'justifyContent': 'center' }}>
                   <ClickeableIcon
                       name='edit'
@@ -61,6 +69,7 @@ export default function TasksTable({ tasks, onDeleteTask }) {
           ))}
         </Table.Body>
       </Table>
+      {!tasks?.length > 0 && <EmptyStateTasks />}
     </div>
   )
 }

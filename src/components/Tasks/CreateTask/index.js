@@ -2,18 +2,19 @@ import React from 'react'
 import { Button } from 'semantic-ui-react'
 import { useDispatch } from 'react-redux'
 import { showModal } from 'components/ModalContainer/modalSlice'
+import './styles.scss'
 
 export default function CreateTask() {
   const dispatch = useDispatch()
   return (
-    <Button
-      color='green'
-      onClick={() => dispatch(showModal({
-        modalType: 'createEdit',
-        modalProps: { isEdit: true }
-      }))}
-    >
-      Create new task
-    </Button>
+    <div className='create-task-btn'>
+      <Button
+        color='green'
+        onClick={() => dispatch(showModal({
+          modalType: 'createEdit',
+        }))}
+        content='Create new task'
+      />
+    </div>
   )
 }

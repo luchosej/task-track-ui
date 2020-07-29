@@ -1,0 +1,16 @@
+.empty-tasks {
+  display: flex;
+  align-items: center;
+  margin: 40px auto;
+  justify-content: center;
+
+  &__msg {
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+
+    p {
+      margin: 0;
+    }
+  }
+}

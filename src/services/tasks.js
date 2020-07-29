@@ -11,9 +11,9 @@ class TaskService {
     }
   }
 
-  async create(description, completed) {
+  async create(title, description, completed) {
     try {
-      return await HtppService.client('tasks', { body: { description, completed }, method: 'POST' })
+      return await HtppService.client('tasks', { body: { title, description, completed }, method: 'POST' })
     } catch (error) {
       throw error
     }
