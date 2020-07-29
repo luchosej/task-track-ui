@@ -2,6 +2,7 @@ import React from 'react'
 import { Card } from 'semantic-ui-react'
 import { useDrag } from 'react-dnd'
 import { ItemTypes } from '../TasksBoard/utils'
+import './styles.scss'
 
 export default function TaskCard({ header, description, meta }) {
   const [{ isDragging }, drag] = useDrag({
@@ -18,7 +19,7 @@ export default function TaskCard({ header, description, meta }) {
   })
   const opacity = isDragging ? 0.4 : 1
   return (
-    <div ref={drag}>
+    <div className='task-card' ref={drag}>
       <Card 
         header={header}
         style={{ opacity, 'cursor': 'move' }}
