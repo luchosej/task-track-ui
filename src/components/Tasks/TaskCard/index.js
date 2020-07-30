@@ -1,16 +1,23 @@
 import React from 'react'
 import { Card } from 'semantic-ui-react'
+import { useDispatch } from 'react-redux'
 import { useDrag } from 'react-dnd'
 import { ItemTypes } from '../TasksBoard/utils'
+import { moveTask } from '../taskSlice'
 import './styles.scss'
 
-export default function TaskCard({ header, description, meta }) {
+export default function TaskCard({ id, header, description, meta }) {
+  const dispatch = useDispatch()
   const [{ isDragging }, drag] = useDrag({
     item: { header, type: ItemTypes.CARD },
     end: (item, monitor) => {
       const dropResult = monitor.getDropResult()
+      console.log(dropResult)
       if (item && dropResult) {
-        alert(`You dropped ${item.header} into ${dropResult.name}!`)
+        dispatch(moveTask({
+          id,
+          moveTo: dropResult.name
+        }))
       }
     },
     collect: (monitor) => ({

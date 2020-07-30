@@ -16,14 +16,16 @@ const COLUMNS = [{
 }]
 
 export default function TaskBoard({ tasks }) {
+
   return (
     <DndProvider backend={HTML5Backend}>
       <div className='tasks-board'>
         {COLUMNS.map((column) =>
           <TaskColumn
             className='tasks-board__column'
-            tasks={tasks}
+            tasks={tasks[column.id]}
             key={column.id}
+            id={column.id}
             title={column.label}
           />
         )}

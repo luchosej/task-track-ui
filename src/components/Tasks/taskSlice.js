@@ -7,6 +7,11 @@ export const taskSlice = createSlice({
   initialState: {
     loading: false,
     error: null,
+    tasks: {
+      todo: null,
+      inprogress: null,
+      done: null
+    },
   },
   reducers: {
     fetchTasksBegin: (state) => {
@@ -14,7 +19,10 @@ export const taskSlice = createSlice({
     },
     fetchTasksSuccess: (state, action) => {
       state.loading = false
-      state.tasks = action.payload
+      state.tasks.all = action.payload
+      state.tasks.todo = action.payload.filter(t => t.state === 'todo')
+      state.tasks.inprogress = action.payload.filter(t => t.state === 'inprogress')
+      state.tasks.done = action.payload.filter(t => t.state === 'done')
     },
     fetchTasksFail: (state, action) => {
       state.loading = false
@@ -53,6 +61,13 @@ export const taskSlice = createSlice({
       state.loading = false
       state.error = action.payload.error
     },
+    moveTask: (state, { payload }) => {
+      const { id, moveTo } = payload
+      const task = state.tasks.all.find(t => t._id === id)
+      state.tasks[task.state] = state.tasks[task.state].filter(t => t._id !== task._id)
+      task.state = moveTo
+      state.tasks[moveTo].push(task)
+    }
   },
 })
 
@@ -69,6 +84,7 @@ export const {
   editTaskBegin,
   editTaskFail,
   editTaskSuccess,
+  moveTask,
 } = taskSlice.actions
 
 export const fetchTasks = () => async (dispatch) => {

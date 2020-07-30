@@ -7,12 +7,12 @@ import './styles.scss'
 export default function TaskColumn({
     className,
     tasks,
-    key,
     title,
+    id,
   }) {
   const [{ canDrop, isOver }, drop] = useDrop({
     accept: ItemTypes.CARD,
-    drop: () => ({ name: title }),
+    drop: () => ({ name: id }),
     collect: (monitor) => ({
       isOver: monitor.isOver(),
       canDrop: monitor.canDrop(),
@@ -31,6 +31,7 @@ export default function TaskColumn({
       <div className='tasks-column__tasks' style={{ backgroundColor }}>
         {tasks?.map(task => (
           <TaskCard
+            id={task._id}
             description={task.description}
             header={task.title}
             meta={task.createdAt.split('T')[0]}
