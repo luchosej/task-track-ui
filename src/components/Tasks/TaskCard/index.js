@@ -16,7 +16,7 @@ export default function TaskCard({ id, header, description, meta }) {
       if (item && dropResult) {
         dispatch(moveTask({
           id,
-          moveTo: dropResult.name
+          newState: dropResult.name
         }))
       }
     },

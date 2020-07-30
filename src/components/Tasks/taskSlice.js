@@ -61,12 +61,13 @@ export const taskSlice = createSlice({
       state.loading = false
       state.error = action.payload.error
     },
-    moveTask: (state, { payload }) => {
-      const { id, moveTo } = payload
+    editTaskState: (state, { payload }) => {
+      debugger
+      const { id, newState } = payload
       const task = state.tasks.all.find(t => t._id === id)
       state.tasks[task.state] = state.tasks[task.state].filter(t => t._id !== task._id)
-      task.state = moveTo
-      state.tasks[moveTo].push(task)
+      task.state = newState
+      state.tasks[newState].push(task)
     }
   },
 })
@@ -84,7 +85,7 @@ export const {
   editTaskBegin,
   editTaskFail,
   editTaskSuccess,
-  moveTask,
+  editTaskState,
 } = taskSlice.actions
 
 export const fetchTasks = () => async (dispatch) => {
@@ -108,15 +109,20 @@ export const createTask = (title, description, completed) => async (dispatch) =>
   }
 }
 
-export const editTask = (id, description, completed) => async (dispatch) => {
+export const editTask = (id, { description, completed, state }) => async (dispatch) => {
   try {
     dispatch(editTaskBegin())
-    const data = await TaskService.edit(id, description, completed)
+    const data = await TaskService.edit(id, { description, completed, state })
     dispatch(editTaskSuccess(data))
     dispatch(hideModal())
   } catch (error) {
     dispatch(editTaskFail(error))
   }
+}
+
+export const moveTask = ({ id, newState }) => async (dispatch) => {
+  await dispatch(editTask(id, { state: newState }))
+  dispatch(editTaskState({ id, newState }))
 }
 
 export const deleteTask = (id) => async (dispatch) => {
