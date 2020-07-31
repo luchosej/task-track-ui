@@ -12,6 +12,7 @@ export const taskSlice = createSlice({
       inprogress: null,
       done: null
     },
+    selectedTask: {},
   },
   reducers: {
     fetchTasksBegin: (state) => {
@@ -68,6 +69,9 @@ export const taskSlice = createSlice({
       state.tasks[task.state] = state.tasks[task.state].filter(t => t._id !== task._id)
       task.state = newState
       state.tasks[newState].push(task)
+    },
+    selectTask: (state, action) => {
+      state.selectedTask = action.payload
     }
   },
 })
@@ -86,6 +90,7 @@ export const {
   editTaskFail,
   editTaskSuccess,
   editTaskState,
+  selectTask,
 } = taskSlice.actions
 
 export const fetchTasks = () => async (dispatch) => {
@@ -139,4 +144,5 @@ export const deleteTask = (id) => async (dispatch) => {
 export const selectLoading = (state) => state.tasks.loading
 export const selectError = (state) => state.tasks.error
 export const selectTasks = (state) => state.tasks.tasks
+export const selectSelectedTask = (state) => state.tasks.selectedTask
 export default taskSlice.reducer

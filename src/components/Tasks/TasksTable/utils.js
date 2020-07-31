@@ -1,1 +1,0 @@
-export const COLUMNS = ['To Do', 'In Progress', 'Done']

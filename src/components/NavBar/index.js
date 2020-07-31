@@ -1,12 +1,17 @@
 import React, { useState } from 'react'
-import { Menu } from 'semantic-ui-react'
+import { Menu, Image } from 'semantic-ui-react'
+import logo from 'assets/images/logo/taskTrackMinimalTrans.png'
 
 export default function NavBar() {
   const [activeItem, setActiveItem] = useState('dashboard')
 
   return (
-    <div>
-      <Menu pointing secondary>
+    <div style={{ padding: '5px 10px'}}>
+      <Menu pointing secondary color='blue'>
+          <Menu.Item style={{ padding: '1px 20px 3px 0px'}}>
+            <Image src={logo} size="mini" />
+            <span style={{ fontSize: '17px'}}>TaskTrack</span>
+          </Menu.Item>
           <Menu.Item
             name='dashboard'
             active={activeItem === 'dashboard'}

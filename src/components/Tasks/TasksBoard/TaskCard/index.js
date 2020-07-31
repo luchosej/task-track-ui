@@ -1,18 +1,22 @@
 import React from 'react'
 import { Card } from 'semantic-ui-react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useDrag } from 'react-dnd'
-import { ItemTypes } from '../TasksBoard/utils'
-import { moveTask } from '../taskSlice'
+import { ItemTypes } from '../utils'
+import { isEmpty } from 'lodash'
+import { moveTask, selectSelectedTask } from '../../taskSlice'
 import './styles.scss'
 
-export default function TaskCard({ id, header, description, meta }) {
+export default function TaskCard({ id, header, description, meta, onClick }) {
   const dispatch = useDispatch()
+  const selectedTask = useSelector(selectSelectedTask)
   const [{ isDragging }, drag] = useDrag({
     item: { header, type: ItemTypes.CARD },
+    begin: (monitor) => {
+      if (!isEmpty(selectedTask)) onClick()
+    },
     end: (item, monitor) => {
       const dropResult = monitor.getDropResult()
-      console.log(dropResult)
       if (item && dropResult) {
         dispatch(moveTask({
           id,
@@ -32,6 +36,7 @@ export default function TaskCard({ id, header, description, meta }) {
         style={{ opacity, 'cursor': 'move' }}
         description={description}
         meta={meta}
+        onClick={onClick}
       />
     </div>
   )

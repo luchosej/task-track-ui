@@ -24,7 +24,6 @@ export default function Tasks() {
   return (
     <div className="tasks">
       <CreateTask onCreateTask={OnCreateTask} />
-      {false && <TasksTable tasks={tasks} onDeleteTask={onDeleteTask} />}
       <TasksBoard tasks={tasks} />
     </div>
   )

@@ -2,18 +2,10 @@ import React from 'react'
 import TaskColumn from './TasksColumn'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
+import SelectedTask from './SelectedTask'
+import { COLUMNS } from './utils'
 
 import './styles.scss'
-const COLUMNS = [{
-  id: 'todo',
-  label: 'To Do'
-}, {
-  id: 'inprogress',
-  label: 'In Progress'
-}, {
-  id: 'done',
-  label: 'Done'
-}]
 
 export default function TaskBoard({ tasks }) {
 
@@ -29,6 +21,7 @@ export default function TaskBoard({ tasks }) {
             title={column.label}
           />
         )}
+        <SelectedTask />
       </div>
     </DndProvider>
   )
