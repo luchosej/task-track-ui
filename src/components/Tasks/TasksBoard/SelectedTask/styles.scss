@@ -11,8 +11,46 @@
     margin-bottom: 10px;
   }
 
+  &__actions {
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 0px !important;
+
+    &-action {
+      cursor: pointer;
+
+      &:hover {
+        color: $blue-0;
+      }
+    }
+
+    & > .selected-task--label {
+      margin-right: 5px;
+    }
+  }
+
   &--label {
     color: #7a869a;
+  }
+
+  &-status {
+    color: white;
+    font-weight: bold;
+    padding: 1px 5px;
+    border-radius: 3px;
+    margin-left: 5px;
+
+    &--done {
+      background-color: green;
+    }
+
+    &--inprogress {
+      background-color: $blue-0;
+    }
+
+    &--todo {
+      background-color: grey;
+    }
   }
 
   &__title {

@@ -34,7 +34,7 @@ export const taskSlice = createSlice({
     },
     createTaskSuccess: (state, action) => {
       state.loading = false
-      state.tasks.unshift(action.payload)
+      state.tasks.todo.unshift(action.payload)
     },
     createTaskFail: (state, action) => {
       state.loading = false
@@ -56,14 +56,13 @@ export const taskSlice = createSlice({
     },
     editTaskSuccess: (state, action) => {
       state.loading = false
-      state.tasks[state.tasks.findIndex((t) => t._id === action.payload._id)] = action.payload
+      state.tasks[action.payload.state][state.tasks[action.payload.state].findIndex((t) => t._id === action.payload._id)] = action.payload
     },
     editTaskFail: (state, action) => {
       state.loading = false
       state.error = action.payload.error
     },
     editTaskState: (state, { payload }) => {
-      debugger
       const { id, newState } = payload
       const task = state.tasks.all.find(t => t._id === id)
       state.tasks[task.state] = state.tasks[task.state].filter(t => t._id !== task._id)
@@ -114,10 +113,10 @@ export const createTask = (title, description, completed) => async (dispatch) =>
   }
 }
 
-export const editTask = (id, { description, completed, state }) => async (dispatch) => {
+export const editTask = (id, updates) => async (dispatch) => {
   try {
     dispatch(editTaskBegin())
-    const data = await TaskService.edit(id, { description, completed, state })
+    const data = await TaskService.edit(id, updates)
     dispatch(editTaskSuccess(data))
     dispatch(hideModal())
   } catch (error) {

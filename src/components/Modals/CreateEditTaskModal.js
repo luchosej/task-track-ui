@@ -9,18 +9,16 @@ export default function CreateEditTaskModal({
     open,
     isEdit,
     description,
-    completed,
     title,
   }) {
   const [description_, setDescription] = useState(description)
   const [title_, setTitle] = useState(title)
-  const [completed_, setCompleted] = useState(completed)
   const dispatch = useDispatch()
 
   const handleOnCreateEditTask = () => {
     if (isEdit)
-      return dispatch(editTask(id, description_, completed_ ))
-    return dispatch(createTask(title_, description_, completed_))
+      return dispatch(editTask(id, { description: description_, title: title_ }))
+    return dispatch(createTask(title_, description_))
   }
 
   return (
@@ -30,6 +28,7 @@ export default function CreateEditTaskModal({
         <Form>
           <Form.Field
             control={Input}
+            value={title_}
             placeholder='Task title'
             onChange={(e) => setTitle(e.target.value)}
           />
@@ -39,9 +38,6 @@ export default function CreateEditTaskModal({
               placeholder='Add a description for the task'
               onChange={(e) => setDescription(e.target.value)}
             />
-          </Form.Field>
-          <Form.Field>
-            <Checkbox checked={completed_} onChange={() => setCompleted(!completed_)} label='Completed' />
           </Form.Field>
         </Form>
         

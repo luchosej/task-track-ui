@@ -31,7 +31,7 @@ export default function TaskCard({ id, header, description, meta, onClick }) {
   const opacity = isDragging ? 0.4 : 1
   return (
     <div className='task-card' ref={drag}>
-      <Card 
+      <Card
         header={header}
         style={{ opacity, 'cursor': 'move' }}
         description={description}
