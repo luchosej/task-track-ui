@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import CreateTask from './CreateTask'
 import TasksBoard from './TasksBoard'
 import { fetchTasks, createTask, selectTasks, deleteTask } from './taskSlice'
+import { Header } from 'semantic-ui-react';
 
 export default function Tasks() {
   const dispatch = useDispatch();
@@ -22,6 +23,7 @@ export default function Tasks() {
 
   return (
     <div className="tasks">
+      <Header as='h1'>Dashboard</Header>
       <CreateTask onCreateTask={OnCreateTask} />
       <TasksBoard tasks={tasks} />
     </div>

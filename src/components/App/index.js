@@ -8,6 +8,7 @@ import PrivateRoute from 'components/PrivateRoute'
 import LandingPage from 'components/LandingPage'
 import Login from 'components/Login'
 import Signup from 'components/Signup'
+import Profile from 'components/Profile'
 import './App.scss';
 import Dashboard from 'components/Dashboard';
 import ModalContainer from 'components/ModalContainer';
@@ -28,6 +29,9 @@ function App() {
           </Route>
           <PrivateRoute path="/dashboard">
             <Dashboard />
+          </PrivateRoute>
+          <PrivateRoute path="/profile">
+            <Profile />
           </PrivateRoute>
         </Switch>
     </Router>

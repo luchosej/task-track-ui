@@ -1,0 +1,16 @@
+.update-user {
+  text-align: left;
+
+  & .header {
+    text-align: center;
+  }
+
+  &__btn {
+    text-align: center;
+  }
+
+  &__delete-btn {
+    text-align: center;
+    margin: 5px 0;
+  }
+}
