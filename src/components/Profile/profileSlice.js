@@ -67,8 +67,8 @@ export const deleteUser = (history) => async (dispatch) => {
 
 export const updateUserAvatar = (file) => async (dispatch) => {
   try {
-    const data = await UserService.addAvatar(file)
-    console.log(data)
+    await UserService.addAvatar(file)
+    window.location.reload()
   } catch (error) {
     dispatch(updateUserFail(error))
   }

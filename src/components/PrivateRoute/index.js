@@ -7,11 +7,11 @@ export default function PrivateRoute({ children, ...rest }) {
   return (
     <Route
       {...rest}
-      render={({ location }) =>
+      render={({ match, location }) =>
         isAuthenticated ? (
           <>
             <NavBar />
-            {children}
+            {React.cloneElement(children, { match })}
           </>
         ) : (
           <Redirect

@@ -41,6 +41,14 @@ class UserService {
       throw error
     }
   }
+
+  async getAvatar(id) {
+    try {
+      return await HtppService.client(`users/${id}/avatar`)
+    } catch (error) {
+      throw error
+    }
+  }
 }
 
 export default new UserService()

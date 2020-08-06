@@ -7,8 +7,9 @@ import logo from 'assets/images/logo/taskTrackMinimalTrans.png'
 import { useDispatch } from 'react-redux'
 
 export default function NavBar() {
-  const [activeItem, setActiveItem] = useState('dashboard')
   const history = useHistory()
+  const { location: { pathname }} = history
+  const [activeItem, setActiveItem] = useState(pathname)
   const dispatch = useDispatch()
   
   const removeToken = () => {
@@ -17,7 +18,7 @@ export default function NavBar() {
     dispatch(hideModal())
   }
   const handleLogout = (name) => {
-    setActiveItem('logout')
+    setActiveItem('/logout')
     dispatch(showModal({
       modalType: 'confirm',
       modalProps: {
@@ -39,21 +40,21 @@ export default function NavBar() {
           </Menu.Item>
           <Link to='/dashboard'>
             <Menu.Item
-              name='dashboard'
-              active={activeItem === 'dashboard'}
+              name='/dashboard'
+              active={activeItem === '/dashboard'}
               onClick={(e, { name }) => setActiveItem(name)}
             />
           </Link>
           <Link to='/profile'>
             <Menu.Item
-              name='profile'
-              active={activeItem === 'profile'}
+              name='/profile'
+              active={activeItem === '/profile'}
               onClick={(e, { name }) => setActiveItem(name)}
             />
           </Link>
           <Menu.Menu position='right'>
             <Menu.Item
-              name='logout'
+              name='/logout'
               active={activeItem === 'logout'}
               onClick={() => handleLogout()}
             />

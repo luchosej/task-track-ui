@@ -35,6 +35,7 @@ export const taskSlice = createSlice({
     createTaskSuccess: (state, action) => {
       state.loading = false
       state.tasks.todo.unshift(action.payload)
+      state.tasks.all.unshift(action.payload)
     },
     createTaskFail: (state, action) => {
       state.loading = false
@@ -58,6 +59,7 @@ export const taskSlice = createSlice({
     editTaskSuccess: (state, action) => {
       state.loading = false
       state.tasks[action.payload.state][state.tasks[action.payload.state].findIndex((t) => t._id === action.payload._id)] = action.payload
+      state.selectedTask = action.payload
     },
     editTaskFail: (state, action) => {
       state.loading = false
@@ -65,6 +67,7 @@ export const taskSlice = createSlice({
     },
     editTaskState: (state, { payload }) => {
       const { id, newState } = payload
+      debugger
       const task = state.tasks.all.find(t => t._id === id)
       state.tasks[task.state] = state.tasks[task.state].filter(t => t._id !== task._id)
       task.state = newState

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import CreateTask from './CreateTask'
 import TasksBoard from './TasksBoard'
-import { fetchTasks, createTask, selectTasks, deleteTask } from './taskSlice'
+import { fetchTasks, createTask, selectTasks } from './taskSlice'
 import { Header } from 'semantic-ui-react';
 
 export default function Tasks() {
@@ -15,10 +15,6 @@ export default function Tasks() {
 
   function OnCreateTask(description, completed = false) {
     dispatch(createTask(description, completed))
-  }
-
-  function onDeleteTask(id) {
-    dispatch(deleteTask(id))
   }
 
   return (

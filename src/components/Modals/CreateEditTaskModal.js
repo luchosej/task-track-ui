@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Modal, Form, TextArea, Button, Checkbox, Input } from 'semantic-ui-react'
+import { Modal, Form, TextArea, Button, Input } from 'semantic-ui-react'
 import { createTask, editTask } from 'components/Tasks/taskSlice'
 import { hideModal } from 'components/ModalContainer/modalSlice'
 import { useDispatch } from 'react-redux'

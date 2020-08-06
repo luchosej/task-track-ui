@@ -15,7 +15,6 @@ export default function CreateTask() {
         onClick={() => dispatch(showModal({
           modalType: 'createEdit',
         }))}
-        content='Create new task'
       >
         <Icon name='tasks' />
         Create new Task

@@ -29,7 +29,6 @@ export default function TaskColumn({
         {tasks?.map(task => (
           <TaskCard
             id={task._id}
-            // description={task.description}
             header={task.title}
             meta={task.description}
             onClick={() => dispatch(selectTask(task))}
