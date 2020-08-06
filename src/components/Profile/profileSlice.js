@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { UserService, StorageService } from 'services'
+import { hideModal } from 'components/ModalContainer/modalSlice'
 
 export const profileSlice = createSlice({
   name: 'user',
@@ -58,11 +59,20 @@ export const deleteUser = (history) => async (dispatch) => {
     await UserService.delete()
     StorageService.remove('user-token')
     history.push('/')
+    dispatch(hideModal())
   } catch (error) {
     dispatch(deleteUserFail(error))
   }
 }
 
+export const updateUserAvatar = (file) => async (dispatch) => {
+  try {
+    const data = await UserService.addAvatar(file)
+    console.log(data)
+  } catch (error) {
+    dispatch(updateUserFail(error))
+  }
+}
 
 export const selectUser = state => state.profile.user
 export default profileSlice.reducer;

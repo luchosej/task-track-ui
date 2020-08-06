@@ -31,6 +31,27 @@ class HttpService {
         }
       })
   }
+
+  clientImage(file) {
+    const token = AuthenticationService.getToken() 
+    const headers = {
+      'Authorization': token ? `Bearer ${token}` : null
+    }
+    let formdata = new FormData();
+    formdata.append("avatar", file);
+
+    var requestOptions = {
+      method: 'POST',
+      headers: headers,
+      body: formdata,
+      redirect: 'follow'
+    };
+
+    fetch(`${process.env.REACT_APP_BASE_URL}/users/me/avatar`, requestOptions)
+      .then(response => response.text())
+      .then(result => console.log(result))
+      .catch(error => console.log('error', error));
+    }
 }
 
 export default new HttpService()

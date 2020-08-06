@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 import { Header, Form, Input, Button, Message } from 'semantic-ui-react'
 import { useHistory } from "react-router-dom";
 import { showModal } from 'components/ModalContainer/modalSlice'
-import { updateUser, deleteUser } from '../profileSlice'
+import { updateUser, deleteUser, updateUserAvatar } from '../profileSlice'
 import './styles.scss'
 
 export default function UpdateUser({
@@ -68,7 +68,14 @@ export default function UpdateUser({
         <Form.Field className='update-user__btn'>
           <Button color='green' type='submit'>Update</Button>
         </Form.Field>
+        <Form.Field>
+          <Form.Field onChange={(e) => dispatch(updateUserAvatar(e.target.files[0]))} value={name_}>
+            <label>Avatar</label>
+            <input type="file" name="avatar" />
+          </Form.Field>
+        </Form.Field>
       </Form>
+
 
       <Message warning>
         <Message.Header>Danger Zone</Message.Header>

@@ -11,7 +11,7 @@ export default function ProfileCard({
     <div className='profile-card'>
       {user && (
         <Card>
-          <Image src={userNotFound} wrapped ui={false} />
+          <Image src={`http://localhost:3001/users/${user._id}/avatar` || userNotFound} wrapped ui={false} />
           <Card.Content>
             <Card.Header>{user.name}</Card.Header>
             <Card.Meta>

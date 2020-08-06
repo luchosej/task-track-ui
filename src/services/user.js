@@ -33,6 +33,14 @@ class UserService {
       throw error
     }
   }
+
+  async addAvatar(file) {
+    try {
+      return await HtppService.clientImage(file)
+    } catch (error) {
+      throw error
+    }
+  }
 }
 
 export default new UserService()
