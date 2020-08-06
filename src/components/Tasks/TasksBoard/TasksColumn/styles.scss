@@ -1,13 +1,15 @@
 .tasks-column {
   width: 500px;
-  min-height: 400px;
+  min-height: 100%;
   &__title {
     margin: 10px;
     font-size: 20px;
   }
 
   &__tasks {
-    // background-color: #f4f5f7;
-    padding: 10px;
+    background-color: #f4f5f7;
+    margin: 10px;
+    padding-top: 10px;
+    height: 100%;
   }
 }

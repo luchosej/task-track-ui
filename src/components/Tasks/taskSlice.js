@@ -45,7 +45,8 @@ export const taskSlice = createSlice({
     },
     deleteTaskSuccess: (state, action) => {
       state.loading = false
-      state.tasks = state.tasks.filter((t) => t._id !== action.payload._id)
+      state.tasks[action.payload.state] = state.tasks[action.payload.state].filter((t) => t._id !== action.payload._id)
+      state.selectedTask = {}
     },
     deleteTaskFail: (state, action) => {
       state.loading = false
@@ -71,7 +72,31 @@ export const taskSlice = createSlice({
     },
     selectTask: (state, action) => {
       state.selectedTask = action.payload
-    }
+    },
+    addTaskCommentBegin: (state) => {
+      state.loading = true
+    },
+    addTaskCommentSuccess: (state, action) => {
+      state.loading = false
+      state.tasks[action.payload.state][state.tasks[action.payload.state].findIndex((t) => t._id === action.payload._id)] = action.payload
+      state.selectedTask = action.payload
+    },
+    addTaskCommentFail: (state, action) => {
+      state.loading = false
+      state.error = action.payload.error
+    },
+    deleteTaskCommentBegin: (state) => {
+      state.loading = true
+    },
+    deleteTaskCommentSuccess: (state, action) => {
+      state.loading = false
+      state.tasks[action.payload.state][state.tasks[action.payload.state].findIndex((t) => t._id === action.payload._id)] = action.payload
+      state.selectedTask = action.payload
+    },
+    deleteTaskCommentFail: (state, action) => {
+      state.loading = false
+      state.error = action.payload.error
+    },
   },
 })
 
@@ -90,6 +115,12 @@ export const {
   editTaskSuccess,
   editTaskState,
   selectTask,
+  addTaskCommentBegin,
+  addTaskCommentSuccess,
+  addTaskCommentFail,
+  deleteTaskCommentBegin,
+  deleteTaskCommentSuccess,
+  deleteTaskCommentFail,
 } = taskSlice.actions
 
 export const fetchTasks = () => async (dispatch) => {
@@ -137,6 +168,27 @@ export const deleteTask = (id) => async (dispatch) => {
     dispatch(hideModal())
   } catch (error) {
     dispatch(deleteTaskFail(error))
+  }
+}
+
+export const addTaskComment = (id, comment) => async (dispatch) => {
+  try {
+    dispatch(addTaskCommentBegin())
+    const data = await TaskService.addComment(id, comment)
+    dispatch(addTaskCommentSuccess(data))
+  } catch (error) {
+    dispatch(addTaskCommentFail(error))
+  }
+}
+
+export const deleteTaskComment = (id, commentId) => async (dispatch) => {
+  try {
+    dispatch(deleteTaskCommentBegin())
+    const data = await TaskService.deleteComment(id, commentId)
+    dispatch(deleteTaskCommentSuccess(data))
+    dispatch(hideModal())
+  } catch (error) {
+    dispatch(deleteTaskCommentFail(error))
   }
 }
 

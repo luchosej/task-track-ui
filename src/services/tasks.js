@@ -34,6 +34,22 @@ class TaskService {
       throw error
     }
   }
+
+  async addComment(id, comment) {
+    try {
+      return await HttpService.client(`tasks/${id}/comments`, { body: { comment }, method: 'POST'})
+    } catch (error) {
+      throw error
+    }
+  }
+
+  async deleteComment(id, commentId) {
+    try {
+      return await HttpService.client(`tasks/${id}/comments/${commentId}`, { method: 'DELETE'})
+    } catch (error) {
+      throw error
+    }
+  }
 }
 
 export default new TaskService()

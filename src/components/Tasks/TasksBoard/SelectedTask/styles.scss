@@ -5,10 +5,18 @@
   border-left: 1px solid $border-color;
   padding: 15px;
   text-align: left;
-  height: 100vh;
-
+  height: 82vh;
+  position: relative;
+  overflow-y: scroll;
+  
   & div {
     margin-bottom: 10px;
+  }
+
+  &__close {
+    position: absolute;
+    right: 5px;
+    top: 5px;
   }
 
   &__actions {
@@ -30,7 +38,7 @@
   }
 
   &--label {
-    color: #7a869a;
+    font-weight: bold;
   }
 
   &-status {
